@@ -10,14 +10,14 @@ exports.getAllClothes = async (req, res) => {
 };
 
 exports.getClothById = async (req, res) => {
-    try{
-        const cloth = await Clothes.findById(req.params.id)
-        if(!cloth)return res.status(404).json({ message:'Not Found' });
-        res.status(200).json(cloth);
-    }catch(err){
-        res.status(500).json({ message: err.message });
-    }
-}
+  try {
+    const cloth = await Clothes.findById(req.params.id);
+    if (!cloth) return res.status(404).json({ message: "Not Found" });
+    res.status(200).json(cloth);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 exports.createNewCloth = async (req, res) => {
   try {
@@ -41,7 +41,7 @@ exports.createNewCloth = async (req, res) => {
       category: req.body.category,
       availableSizes: req.body.availableSizes,
     });
-    newClothes.save();
+    await newClothes.save();
     res.status(201).json(newClothes);
   } catch (err) {
     res.status(500).json({ message: err.message });
